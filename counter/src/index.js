@@ -18,7 +18,7 @@ const initState = 0;
 function view(dispatch, state) {
   /**
    * Call hyperscript div function to render a div on the page that includes
-   * another div for the count label plus the count number and the plus and minus buttons
+   * another div for the count label, the count number and the plus and minus buttons
    * mv2: margin vertical second step
    * pv1: padding vertical second step
    * ph2: padding horizontal second step
@@ -27,34 +27,34 @@ function view(dispatch, state) {
   return div({ className: 'mv2' }, [
     div(`Count: ${state}`),
     button(
-      { className: 'pv1 ph2 mr2', onclick: () => dispatch(msgs.add) },
+      { className: 'pv1 ph2 mr2', onclick: () => dispatch(actionType.add) },
       '+'
     ),
     button(
-      { className: 'pv1 ph2', onclick: () => dispatch(msgs.subtract) },
+      { className: 'pv1 ph2', onclick: () => dispatch(actionType.subtract) },
       '-'
     )
   ]);
 }
 
-const msgs = {
+const actionType = {
   add: 'add',
   subtract: 'subtract'
 };
 
 /**
- * Update app state according the given action
+ * Update app state according to the given action
  * @param action The action to be taken by the update function
  * @param state The app state
  */
 
 function update(action, state) {
   switch (action) {
-    //Even though msgs is not part of the input param, it's a constant we won't
-    //update, hence the function remains pure.
-    case msgs.add:
+    //Even though actionType is not part of the input param, it's a constant we won't
+    //change, hence the function remains pure.
+    case actionType.add:
       return state + 1;
-    case msgs.subtract:
+    case actionType.subtract:
       return state - 1;
     default:
       return state;
@@ -86,7 +86,7 @@ function app(initState, update, view, node) {
   //Show the first app render on the page using the virtual dom element
   node.appendChild(rootNode);
 
-  //App lifecycle. Called when the user clicks on the plus and minus buttons
+  //App lifecycle. Called when the user clicks on the plus or minus buttons
   function dispatch(action) {
     //update the state based on the given action
     state = update(action, state);
@@ -112,5 +112,3 @@ const rootNode = document.getElementById('app');
  * Run the application
  */
 app(initState, update, view, rootNode);
-
-//rootNode.appendChild(view(update('minus', initState)));
