@@ -1,6 +1,6 @@
 import initModel from './Model';
 import update from './Update';
-import view from './View';
+import view from './Views/CaloriesCounter';
 import app from './App';
 
 /**

@@ -1,5 +1,4 @@
-import hh from 'hyperscript-helpers'; //provides all the html functions like div, p, h1 etc.
-import { h, diff, patch } from 'virtual-dom'; //allows to refresh only the portion of the html elements that changed
+import { diff, patch } from 'virtual-dom'; //allows to refresh only the portion of the html elements that changed
 import createElement from 'virtual-dom/create-element';
 
 /**
