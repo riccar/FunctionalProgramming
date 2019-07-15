@@ -21,7 +21,7 @@ function unitOptions(selectedUnit) {
  * @param {*} dispatch
  * @param {*} model
  */
-function unitSelection(dispatch, unit, value, oninput) {
+function unitSelection(unit, value, oninput, onchange) {
   //width 50%
   return div({ className: 'w-50 ma1' }, [
     input({
@@ -33,7 +33,8 @@ function unitSelection(dispatch, unit, value, oninput) {
     }),
     select(
       {
-        className: 'db w-100 pa2 ba input-reset br1 bg-white ba b--black'
+        className: 'db w-100 pa2 ba input-reset br1 bg-white ba b--black',
+        onchange
       },
       unitOptions(unit)
     )
@@ -44,12 +45,18 @@ function view(dispatch, model) {
   return div({ className: 'mw6 center' }, [
     h1({ className: 'f2 pv2 bb' }, 'Temperature Unit Converter'),
     div({ className: 'flex' }, [
-      unitSelection(dispatch, model.leftUnit, model.leftValue, e =>
-        dispatch(action(actionType.LEFT_INPUT, e.target.value))
+      unitSelection(
+        model.leftUnit,
+        model.leftValue,
+        e => dispatch(action(actionType.LEFT_VALUE_INPUT, e.target.value)),
+        e => dispatch(action(actionType.LEFT_UNIT_CHANGE, e.target.value))
       ),
       div({ className: 'f2 mv3 mh4' }, '='),
-      unitSelection(dispatch, model.rightUnit, model.rightValue, e =>
-        dispatch(action(actionType.RIGHT_INPUT, e.target.value))
+      unitSelection(
+        model.rightUnit,
+        model.rightValue,
+        e => dispatch(action(actionType.RIGHT_VALUE_INPUT, e.target.value)),
+        e => dispatch(action(actionType.RIGHT_UNIT_CHANGE, e.target.value))
       )
     ]),
     pre(JSON.stringify(model, null, 2))

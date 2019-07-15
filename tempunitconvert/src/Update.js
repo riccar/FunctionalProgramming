@@ -1,8 +1,12 @@
 import * as R from 'ramda';
 
+import convert from './TempConversion';
+
 export const actionType = {
-  LEFT_INPUT: 'LEFT_INPUT',
-  RIGHT_INPUT: 'RIGHT_INPUT'
+  LEFT_VALUE_INPUT: 'LEFT_VALUE_INPUT',
+  RIGHT_VALUE_INPUT: 'RIGHT_VALUE_INPUT',
+  LEFT_UNIT_CHANGE: 'LEFT_UNIT_CHANGE',
+  RIGHT_UNIT_CHANGE: 'RIGHT_UNIT_CHANGE'
 };
 
 /**
@@ -25,12 +29,16 @@ const toInt = R.pipe(
 function update(action, model) {
   const { type, payload } = action;
   switch (type) {
-    case actionType.LEFT_INPUT:
+    case actionType.LEFT_VALUE_INPUT:
       const leftValue = toInt(payload);
-      return { ...model, leftValue, inputLeft: true };
-    case actionType.RIGHT_INPUT:
+      return convert({ ...model, leftValue, inputLeft: true });
+    case actionType.RIGHT_VALUE_INPUT:
       const rightValue = toInt(payload);
-      return { ...model, rightValue, inputLeft: false };
+      return convert({ ...model, rightValue, inputLeft: false });
+    case actionType.LEFT_UNIT_CHANGE:
+      return convert({ ...model, leftUnit: payload });
+    case actionType.RIGHT_UNIT_CHANGE:
+      return convert({ ...model, rightUnit: payload });
   }
   return model;
 }
