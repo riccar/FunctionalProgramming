@@ -12,11 +12,6 @@ export function action(type, payload) {
   };
 }
 
-const toInt = R.pipe(
-  parseInt,
-  R.defaultTo(0)
-);
-
 function update(action, model) {
   const { type, payload } = action;
   switch (type) {

@@ -4,7 +4,7 @@ import { h } from 'virtual-dom';
 
 import { action, actionType } from './Update';
 
-const { div, h1, p, pre, input, label } = hh(h);
+const { div, h1, pre, input, label } = hh(h);
 
 function inputField(fieldLabel, value, dispatch, actionType) {
   return div({ className: 'w-40' }, [

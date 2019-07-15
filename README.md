@@ -5,8 +5,9 @@ Based on the course "Functional Programming for Beginners with JavaScript by Jam
 ## A number of small apps developed entirely with pure JS and a few libraries
 
 - Counter: Simple counter app
-- Caloriecounter. Allows to add edit and delete meals and their calories. It shows meals in a table where the last row is the total number of calories for all the meals.
-- tempunitconvert. Converts temperature units between Fahrenheit, Celsius and Kelvin.
+- Calorie Counter. Allows to add edit and delete meals and their calories. It shows meals in a table where the last row is the total number of calories for all the meals.
+- Temp Unit Convert. Converts temperature units between Fahrenheit, Celsius and Kelvin.
+- Tip Calculator: Calculate tip and total based on bill amount and tip percentage.
 
 ## Libraries used
 
