@@ -1,0 +1,22 @@
+{
+  "name": "tempunitofmeasure",
+  "version": "1.0.0",
+  "description": "Temperature Unit Of Measure Convert",
+  "scripts": {
+    "start": "webpack-dev-server --open"
+  },
+  "author": "James Moore",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "hyperscript-helpers": "^3.0.3",
+    "ramda": "^0.25.0",
+    "virtual-dom": "^2.1.1",
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.7.2"
+  }
+}
