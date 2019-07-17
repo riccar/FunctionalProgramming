@@ -1,19 +1,11 @@
 const state = {
-  nextId: 2,
+  nextId: 1,
   flashCards: [
     {
       id: 0,
-      question: 'Question 1',
-      answer: 'Sample answer',
+      question: 'Sample question. Click here to edit',
+      answer: 'Sample answer. Click here to edit',
       ranking: 0,
-      showAnswer: false,
-      edit: false
-    },
-    {
-      id: 1,
-      question: 'Question 2',
-      answer: 'Sample answer',
-      ranking: 1,
       showAnswer: false,
       edit: false
     }
