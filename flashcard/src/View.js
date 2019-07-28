@@ -29,20 +29,32 @@ const card = R.curry((dispatch, card) => {
     div({ className: 'w-100 pa2 bg-light-yellow shadow-1 mv2 relative pb5' }, [
       editMode ? editCard(dispatch, card) : viewCard(dispatch, card),
       i({
-        className: 'absolute top-0 right-0 fa fa-remove fa-fw black-50 pointer'
+        className: 'absolute top-0 right-0 fa fa-remove fa-fw black-50 pointer',
+        onclick: () => dispatch(action(actionType.DELETE_FLASHCARD, card))
       })
     ])
   ]);
 });
 
 const viewCard = (dispatch, card) => {
-  const { question, answer, ranking } = card;
+  const { id, question, answer, ranking, showAnswer } = card;
   return div({}, [
-    showContent(dispatch, card.id, question, 'Question'),
-    showContent(dispatch, card.id, answer, 'Answer'),
+    showContent(dispatch, id, question, 'Question'),
+    showAnswer ? showContent(dispatch, id, answer, 'Answer') : 
+    showTheAnswer(dispatch, id),
     rankingButtons(dispatch, ranking)
   ]);
 };
+
+const showTheAnswer = (dispatch, id) => {
+  return div(
+    { 
+      className: 'b f6 mv1 underline pointer', 
+      onclick: () => dispatch(action(actionType.SHOW_ANSWER, { id, showAnswer: true })) 
+    }, 
+    'Show Answer'
+  )
+}
 
 const showContent = (dispatch, id, content, label) => {
   return div({}, [
