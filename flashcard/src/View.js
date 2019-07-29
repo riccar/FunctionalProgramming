@@ -37,24 +37,28 @@ const card = R.curry((dispatch, card) => {
 });
 
 const viewCard = (dispatch, card) => {
-  const { id, question, answer, ranking, showAnswer } = card;
+  const { id, question, answer, showAnswer } = card;
   return div({}, [
     showContent(dispatch, id, question, 'Question'),
-    showAnswer ? showContent(dispatch, id, answer, 'Answer') : 
-    showTheAnswer(dispatch, id),
-    rankingButtons(dispatch, ranking)
+    showAnswer
+      ? [
+          showContent(dispatch, id, answer, 'Answer'),
+          rankingButtons(dispatch, id)
+        ]
+      : showTheAnswer(dispatch, id)
   ]);
 };
 
 const showTheAnswer = (dispatch, id) => {
   return div(
-    { 
-      className: 'b f6 mv1 underline pointer', 
-      onclick: () => dispatch(action(actionType.SHOW_ANSWER, { id, showAnswer: true })) 
-    }, 
+    {
+      className: 'b f6 mv1 underline pointer',
+      onclick: () =>
+        dispatch(action(actionType.SHOW_ANSWER, { id, showAnswer: true }))
+    },
     'Show Answer'
-  )
-}
+  );
+};
 
 const showContent = (dispatch, id, content, label) => {
   return div({}, [
@@ -70,13 +74,52 @@ const showContent = (dispatch, id, content, label) => {
   ]);
 };
 
-const rankingButtons = (dispatch, ranking) => {
+const rankingButtons = (dispatch, id) => {
   return div({}, [
     div({ className: 'absolute bottom-0 left-0 w-100 ph2' }, [
       div({ className: 'mv2 flex justify-between' }, [
-        button({ className: 'f4 ph3 pv2 bg-red bn white br1' }, 'Bad'),
-        button({ className: 'f4 ph3 pv2 bg-blue bn white br1' }, 'Good'),
-        button({ className: 'f4 ph3 pv2 bg-green bn white br1' }, 'Great')
+        button(
+          {
+            className: 'f4 ph3 pv2 bg-red bn white br1 pointer',
+            onclick: () =>
+              dispatch(
+                action(actionType.RANK_ANSWER, {
+                  id,
+                  ranking: 0,
+                  showAnswer: false
+                })
+              )
+          },
+          'Bad'
+        ),
+        button(
+          {
+            className: 'f4 ph3 pv2 bg-blue bn white br1 pointer',
+            onclick: () =>
+              dispatch(
+                action(actionType.RANK_ANSWER, {
+                  id,
+                  ranking: 1,
+                  showAnswer: false
+                })
+              )
+          },
+          'Good'
+        ),
+        button(
+          {
+            className: 'f4 ph3 pv2 bg-green bn white br1 pointer',
+            onclick: () =>
+              dispatch(
+                action(actionType.RANK_ANSWER, {
+                  id,
+                  ranking: 2,
+                  showAnswer: false
+                })
+              )
+          },
+          'Great'
+        )
       ])
     ])
   ]);
