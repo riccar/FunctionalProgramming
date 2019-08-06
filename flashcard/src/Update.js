@@ -62,7 +62,7 @@ function update(action, state) {
       return { ...state, flashCards };
     }
     case 'RANK_ANSWER': {
-      const flashCards = R.map(updateCard(payload), state.flashCards);
+      const flashCards = R.map(updateCardPlusRank(payload), state.flashCards);
       return { ...state, flashCards };
     }
   }
@@ -80,6 +80,12 @@ const updateCard = R.curry((updatedCard, card) => {
    * Any attribute in common will be overridden with updatedCard ones.
    * */
   return updatedCard.id === card.id ? { ...card, ...updatedCard } : card;
+});
+
+const updateCardPlusRank = R.curry((updatedCard, card) => {
+  return updatedCard.id === card.id
+    ? { ...card, ...updatedCard, ranking: card.ranking + updatedCard.ranking }
+    : card;
 });
 
 export default update;

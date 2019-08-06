@@ -18,9 +18,11 @@ const addFlashCardBtn = dispatch => {
   ]);
 };
 
+const sortByRank = R.sortWith([R.ascend(R.prop('ranking'))]);
+
 const listFlashCards = (dispatch, state) => {
-  const cards = R.map(card(dispatch), state.flashCards);
-  return div({ className: 'flex flex-wrap nl2 nr2' }, cards);
+  const cards = R.map(card(dispatch), sortByRank(state.flashCards));
+  return div({ className: 'flex flex-wrap nl2 nr2' }, sortByRank(cards));
 };
 
 const card = R.curry((dispatch, card) => {
